@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class WebhookEvent(str, Enum):
     """
-    Event types. `request.created`, `request.success`, `request.cancelled`, `request.error`, and `signer.signed` are dispatched for their respective lifecycle events. `webhook.test` is sent when you use the test endpoint to verify your webhook URL. 
+    Event types. `request.created`, `request.success`, `request.cancelled`, and `request.error` are dispatched for request lifecycle transitions. `signer.viewed` fires each time a signer loads their signing link, `signer.signed` fires when a signer completes signing, and `signer.declined` fires when a signer explicitly declines to sign. `webhook.test` is sent when you use the test endpoint to verify your webhook URL. 
     """
 
     """
@@ -31,7 +31,9 @@ class WebhookEvent(str, Enum):
     REQUEST_DOT_SUCCESS = 'request.success'
     REQUEST_DOT_CANCELLED = 'request.cancelled'
     REQUEST_DOT_ERROR = 'request.error'
+    SIGNER_DOT_VIEWED = 'signer.viewed'
     SIGNER_DOT_SIGNED = 'signer.signed'
+    SIGNER_DOT_DECLINED = 'signer.declined'
     WEBHOOK_DOT_TEST = 'webhook.test'
 
     @classmethod

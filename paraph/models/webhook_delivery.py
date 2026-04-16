@@ -29,7 +29,7 @@ from pydantic_core import to_jsonable_python
 
 class WebhookDelivery(BaseModel):
     """
-    Payload delivered to your webhook URL when an event occurs.  Deliveries include an `X-Signature-256` header containing `sha256=<hex>` where `<hex>` is the HMAC-SHA256 of the request body using the webhook's secret as the key. Verify this to confirm the delivery came from Paraph.  Failed deliveries are retried up to 5 times with exponential backoff (1s, 2s, 4s, 8s, 16s). Each attempt has a 10-second timeout. After all retries are exhausted the delivery is marked as failed. 
+    Payload delivered to your webhook URL when an event occurs.  **Verifying deliveries**: Paraph follows the [Standard Webhooks](https://standardwebhooks.com) spec. Each delivery carries three headers:  - `webhook-id` — unique UUID for this delivery (use to   deduplicate retries). - `webhook-timestamp` — Unix seconds when the delivery was   sent. Reject deliveries whose timestamp is too far from   now to guard against replays. - `webhook-signature` — `v1,<base64>` where `<base64>` is the   HMAC-SHA256 of `\"{webhook-id}.{webhook-timestamp}.{body}\"`   using your webhook's secret as the key.  Language libraries that implement the spec can verify deliveries in a few lines — see `@standard-webhooks/webhooks` on npm and equivalents for other runtimes.  Failed deliveries are retried up to 5 times with exponential backoff (1s, 2s, 4s, 8s, 16s). Each attempt has a 10-second timeout. After all retries are exhausted the delivery is marked as failed. 
     """ # noqa: E501
     event: WebhookEvent
     timestamp: datetime
