@@ -1,6 +1,6 @@
 [project]
 name = "paraph"
-version = "0.1.2"
+version = "0.1.0"
 description = "Paraph API"
 authors = [
   {name = "Paraph Support",email = "support@paraph.dev"},

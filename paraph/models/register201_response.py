@@ -1,6 +1,5 @@
 # coding: utf-8
 
-# flake8: noqa
 """
     Paraph API
 
@@ -13,43 +12,82 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-# import models into model package
-from paraph.models.account import Account
-from paraph.models.account_limits import AccountLimits
-from paraph.models.account_usage import AccountUsage
-from paraph.models.create_request_request import CreateRequestRequest
-from paraph.models.create_webhook201_response import CreateWebhook201Response
-from paraph.models.create_webhook201_response_webhook import CreateWebhook201ResponseWebhook
-from paraph.models.create_webhook_request import CreateWebhookRequest
-from paraph.models.document_request import DocumentRequest
-from paraph.models.document_request_summary import DocumentRequestSummary
-from paraph.models.error import Error
-from paraph.models.error_error import ErrorError
-from paraph.models.get_account200_response import GetAccount200Response
-from paraph.models.list_info import ListInfo
-from paraph.models.model_field import ModelField
-from paraph.models.register201_response import Register201Response
+
+from __future__ import annotations
+import pprint
+import re  # noqa: F401
+import json
+
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
 from paraph.models.register201_response_auth import Register201ResponseAuth
-from paraph.models.register_request import RegisterRequest
-from paraph.models.request_list_response import RequestListResponse
-from paraph.models.request_response import RequestResponse
-from paraph.models.request_status import RequestStatus
-from paraph.models.resend_signing_link200_response import ResendSigningLink200Response
-from paraph.models.signature_placement import SignaturePlacement
-from paraph.models.signature_placement_input import SignaturePlacementInput
-from paraph.models.signer import Signer
-from paraph.models.signer_input import SignerInput
-from paraph.models.signer_status import SignerStatus
-from paraph.models.template import Template
-from paraph.models.template_detail import TemplateDetail
-from paraph.models.template_list_response import TemplateListResponse
-from paraph.models.template_response import TemplateResponse
-from paraph.models.update_template_request import UpdateTemplateRequest
-from paraph.models.update_webhook_request import UpdateWebhookRequest
-from paraph.models.webhook import Webhook
-from paraph.models.webhook_delivery import WebhookDelivery
-from paraph.models.webhook_delivery_data import WebhookDeliveryData
-from paraph.models.webhook_event import WebhookEvent
-from paraph.models.webhook_list_response import WebhookListResponse
-from paraph.models.webhook_response import WebhookResponse
+from typing import Optional, Set
+from typing_extensions import Self
+from pydantic_core import to_jsonable_python
+
+class Register201Response(BaseModel):
+    """
+    Register201Response
+    """ # noqa: E501
+    auth: Register201ResponseAuth
+    __properties: ClassVar[List[str]] = ["auth"]
+
+    model_config = ConfigDict(
+        validate_by_name=True,
+        validate_by_alias=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
+
+
+    def to_str(self) -> str:
+        """Returns the string representation of the model using alias"""
+        return pprint.pformat(self.model_dump(by_alias=True))
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the model using alias"""
+        return json.dumps(to_jsonable_python(self.to_dict()))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Optional[Self]:
+        """Create an instance of Register201Response from a JSON string"""
+        return cls.from_dict(json.loads(json_str))
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([
+        ])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
+        # override the default output from pydantic by calling `to_dict()` of auth
+        if self.auth:
+            _dict['auth'] = self.auth.to_dict()
+        return _dict
+
+    @classmethod
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+        """Create an instance of Register201Response from a dict"""
+        if obj is None:
+            return None
+
+        if not isinstance(obj, dict):
+            return cls.model_validate(obj)
+
+        _obj = cls.model_validate({
+            "auth": Register201ResponseAuth.from_dict(obj["auth"]) if obj.get("auth") is not None else None
+        })
+        return _obj
+
 

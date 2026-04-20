@@ -20,6 +20,7 @@ __version__ = "0.1.0"
 # Define package exports
 __all__ = [
     "AccountApi",
+    "AuthApi",
     "RequestsApi",
     "SignersApi",
     "TemplatesApi",
@@ -47,6 +48,9 @@ __all__ = [
     "GetAccount200Response",
     "ListInfo",
     "ModelField",
+    "Register201Response",
+    "Register201ResponseAuth",
+    "RegisterRequest",
     "RequestListResponse",
     "RequestResponse",
     "RequestStatus",
@@ -72,6 +76,7 @@ __all__ = [
 
 # import apis into sdk package
 from paraph.api.account_api import AccountApi as AccountApi
+from paraph.api.auth_api import AuthApi as AuthApi
 from paraph.api.requests_api import RequestsApi as RequestsApi
 from paraph.api.signers_api import SignersApi as SignersApi
 from paraph.api.templates_api import TemplatesApi as TemplatesApi
@@ -103,6 +108,9 @@ from paraph.models.error_error import ErrorError as ErrorError
 from paraph.models.get_account200_response import GetAccount200Response as GetAccount200Response
 from paraph.models.list_info import ListInfo as ListInfo
 from paraph.models.model_field import ModelField as ModelField
+from paraph.models.register201_response import Register201Response as Register201Response
+from paraph.models.register201_response_auth import Register201ResponseAuth as Register201ResponseAuth
+from paraph.models.register_request import RegisterRequest as RegisterRequest
 from paraph.models.request_list_response import RequestListResponse as RequestListResponse
 from paraph.models.request_response import RequestResponse as RequestResponse
 from paraph.models.request_status import RequestStatus as RequestStatus

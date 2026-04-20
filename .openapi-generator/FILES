@@ -5,6 +5,7 @@ docs/Account.md
 docs/AccountApi.md
 docs/AccountLimits.md
 docs/AccountUsage.md
+docs/AuthApi.md
 docs/CreateRequestRequest.md
 docs/CreateWebhook201Response.md
 docs/CreateWebhook201ResponseWebhook.md
@@ -16,6 +17,9 @@ docs/ErrorError.md
 docs/GetAccount200Response.md
 docs/ListInfo.md
 docs/ModelField.md
+docs/Register201Response.md
+docs/Register201ResponseAuth.md
+docs/RegisterRequest.md
 docs/RequestListResponse.md
 docs/RequestResponse.md
 docs/RequestStatus.md
@@ -45,6 +49,7 @@ git_push.sh
 paraph/__init__.py
 paraph/api/__init__.py
 paraph/api/account_api.py
+paraph/api/auth_api.py
 paraph/api/requests_api.py
 paraph/api/signers_api.py
 paraph/api/templates_api.py
@@ -68,6 +73,9 @@ paraph/models/error_error.py
 paraph/models/get_account200_response.py
 paraph/models/list_info.py
 paraph/models/model_field.py
+paraph/models/register201_response.py
+paraph/models/register201_response_auth.py
+paraph/models/register_request.py
 paraph/models/request_list_response.py
 paraph/models/request_response.py
 paraph/models/request_status.py
@@ -97,4 +105,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_auth_api.py
+test/test_register201_response.py
+test/test_register201_response_auth.py
+test/test_register_request.py
 tox.ini
